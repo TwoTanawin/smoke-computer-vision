@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model, preprocess = clip.load("ViT-B/32", device=device)
+model, preprocess = clip.load("ViT-L/14", device=device)
 
 data_path = "/app/smoke-detect/tracking/src/old-code/output/1/"
 
@@ -20,7 +20,7 @@ for file_name in files:
     file_path = os.path.join(data_path, file_name)
 
     image = preprocess(Image.open(file_path)).unsqueeze(0).to(device)
-    text = clip.tokenize(["no smoke vehicle", "smoke vehicle"]).to(device)
+    text = clip.tokenize(["vehicle no smoke", "vehicle smoke"]).to(device)
     
     inx += 1
 
